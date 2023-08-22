@@ -1,0 +1,15 @@
+#! /bin/bash
+
+intf=eth4
+host=10.64.104.11
+
+
+if [ "$1" = arp ]; then
+    sudo tcpdump -Z zhe.li -i $intf arp host $host -w ~/tmp/temp.pcap
+elif [ "$1" = icmp ]; then
+    sudo tcpdump -Z zhe.li -i $intf icmp -w ~/tmp/temp.pcap
+else
+    sudo tcpdump -Z zhe.li -i $intf host $host -w ~/tmp/temp.pcap
+fi
+
+wireshark ~/tmp/temp.pcap
